@@ -11,13 +11,19 @@ import org.junit.Test;
 
 public class GoodReadTest extends BaseTest{
 
+    String basicUserName = "azolka";
+    String basicPassword = "test1234";
+
     @Before
     public void registerNewUser(){
+        int alias = generateAlias();
         openGoodReadsSite();
         HomePage homePage = new HomePage();
-        homePage.enterSignUpName();
-        homePage.enterSignUpEmail();
+        homePage.enterSignUpName(basicUserName+alias);
+        homePage.enterSignUpEmail(basicUserName+"+"+alias+"gmail.com");
+        homePage.enterSignUpPassword(basicPassword);
         GettingStartedPage gettingStartedPage = homePage.clickSignUpButton();
+        System.out.println("User was signed up");
 
     }
 
