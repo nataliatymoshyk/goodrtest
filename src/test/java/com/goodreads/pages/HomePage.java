@@ -35,35 +35,51 @@ public class HomePage {
     public void enterSignUpName(String name){
         signUpUserNameField.should(Condition.appear);
         signUpUserNameField.setValue(name);
-        System.out.println(name + " entered into Sign Up Name field");
+        System.out.println(name + " entered into Sign up name field");
     }
 
     public void enterSignUpEmail(String email){
         signUpUserEmailField.should(Condition.appear);
         signUpUserEmailField.setValue(email);
-        System.out.println(email + " entered into Sign Up Email field");
+        System.out.println(email + " entered into Sign up email field");
 
 
     }
     public void enterSignUpPassword(String password){
         signUpPasswordField.should(Condition.appear);
         signUpPasswordField.setValue(password);
-        System.out.println(password + " entered into Sign Up Password field");
+        System.out.println(password + " entered into Sign up password field");
 
     }
 
-    public void clickSignUpButton(){
+    public GettingStartedPage clickSignUpButton(){
+        signUpButton.should(Condition.appear);
+        signUpButton.click();
+        System.out.println("Sign up button clicked");
+        return new GettingStartedPage();
+
 
     }
 
     public void enterSignInEmail(String email){
+        signInEmailField.should(Condition.appear);
+        signInEmailField.setValue(email);
+        System.out.println(email + " entered into Sign in email field");
+
 
     }
     public void enterSignInPassword(String email){
+        signInPasswordField.should(Condition.appear);
+        signInPasswordField.setValue(email);
+        System.out.println(email + " entered into Sign in password field");
 
     }
 
-    public void clickSignInButton(){
+    public RecentUpdatesPage clickSignInButton(){
+        signInButton.should(Condition.appear);
+        signInButton.click();
+        System.out.println("Sign in button clicked");
+        return  new RecentUpdatesPage();
 
     }
 

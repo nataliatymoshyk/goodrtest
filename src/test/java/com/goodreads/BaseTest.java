@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Random;
+
 /**
  * Created by natalia on 8/18/18.
  */
@@ -19,6 +21,13 @@ public class BaseTest {
 
     public void openGoodReadsSite(){
         getDriver().get(baseURL);
+
+    }
+    public int generateAlias(){
+        int number;
+        Random random = new Random();
+        number = random.nextInt(5);
+        return number;
 
     }
 
