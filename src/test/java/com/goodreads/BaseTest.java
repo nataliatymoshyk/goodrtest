@@ -1,37 +1,38 @@
 package com.goodreads;
 
-import com.sun.tools.internal.jxc.ConfigReader;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverProvider;
+import com.goodreads.pages.HomePage;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.json.JSONObject;
+import com.codeborne.selenide.WebDriverRunner;
 
 import java.util.Random;
 
 /**
  * Created by natalia on 8/18/18.
  */
-public class BaseTest {
-    String baseURL = "https://www.goodreads.com/";
+public class BaseTest  {
 
-    private static WebDriver driver;
-
-    public WebDriver getDriver(){
-        driver = new ChromeDriver();
-        return driver;
+    @BeforeClass
+    public static void init(){
+        Configuration.baseUrl= "https://www.goodreads.com/";
+        Configuration.timeout = 4000;
+        Configuration.browser = WebDriverFactory.class.getName();
     }
 
-    public void openGoodReadsSite(){
-        getDriver().get(baseURL);
 
+    public String generateAlias(){ return RandomStringUtils.randomAlphabetic(6);
+        }
+
+    @After
+    public void finish(){
+        Selenide.close();
     }
-    public int generateAlias(){
-        int number;
-        Random random = new Random();
-        number = random.nextInt(5);
-        return number;
-
-    }
-
 
 
 }

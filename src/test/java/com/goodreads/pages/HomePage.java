@@ -1,16 +1,19 @@
 package com.goodreads.pages;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+
 import org.openqa.selenium.support.FindBy;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.url;
 
 
 /**
  * Created by natalia on 8/18/18.
  */
-public class HomePage {
+public class HomePage  {
+
     @FindBy(id = "user_first_name")
     private SelenideElement signUpUserNameField;
 
@@ -20,7 +23,7 @@ public class HomePage {
     @FindBy(id ="user_password_signup")
     private SelenideElement signUpPasswordField;
 
-    @FindBy(xpath = "//input[@type='submit and @value='Sign up']" )
+    @FindBy(xpath = "//input[@type='submit' and @value='Sign up']" )
     private SelenideElement signUpButton;
 
     @FindBy(id = "userSignInFormEmail")
@@ -31,6 +34,12 @@ public class HomePage {
 
     @FindBy(xpath ="//input[@type='submit' and @value='Sign in']")
     private SelenideElement signInButton;
+
+
+    public static HomePage open() {
+        return Selenide.open("https://www.goodreads.com/", HomePage.class);
+    }
+    public static HomePage page(){return Selenide.page(HomePage.class);}
 
     public void enterSignUpName(String name){
         signUpUserNameField.should(Condition.appear);
@@ -58,7 +67,6 @@ public class HomePage {
         System.out.println("Sign up button clicked");
         return new GettingStartedPage();
 
-
     }
 
     public void enterSignInEmail(String email){
@@ -75,14 +83,15 @@ public class HomePage {
 
     }
 
-    public RecentUpdatesPage clickSignInButton(){
+    public <T> T clickSignInButton(T expectedPage){
         signInButton.should(Condition.appear);
         signInButton.click();
+        if (url() ==  "https://www.goodreads.com/user/sign_in?source=home"){
+            return expectedPage;
+        }
         System.out.println("Sign in button clicked");
-        return  new RecentUpdatesPage();
+        return expectedPage;
 
     }
-
-
 
 }
