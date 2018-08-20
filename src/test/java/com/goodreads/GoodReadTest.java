@@ -51,4 +51,25 @@ public class GoodReadTest extends BaseTest{
 
    }
 
+
+   @Test
+    public void searchForThreeBestCrimeBooks(){
+       homePage.enterSignInEmail(basicUserName);
+       homePage.enterSignInPassword(basicPassword);
+       RecentUpdatesPage page = homePage.clickSignInButton(new RecentUpdatesPage().page());
+       SearchResultPage search = page.searchBookByQuery("Best crime and mystery books");
+       search.clickWantToReadButtonForBook("1");
+       search.clickWantToReadButtonForBook("2");
+       search.clickWantToReadButtonForBook("3");
+   }
+
+   @Test
+    public void markBooksAsReadAndAddReview(){
+       homePage.enterSignInEmail(basicUserName);
+       homePage.enterSignInPassword(basicPassword);
+       RecentUpdatesPage page = homePage.clickSignInButton(new RecentUpdatesPage().page());
+       SearchResultPage search = page.searchBookByQuery("Best crime and mystery books");
+       search.clickMarkBookAsReadButtonForBook("1");
+
+   }
 }

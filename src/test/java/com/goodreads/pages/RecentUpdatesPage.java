@@ -28,6 +28,10 @@ public class RecentUpdatesPage  {
     @FindBy(xpath = "//li[@role='menuitem']/a[@href='/user/sign_out']")
     private SelenideElement signOutProfileMenuItem;
 
+    @FindBy(xpath = "//input[@class='searchBox__input searchBox__input--navbar']")
+    private SelenideElement searchField;
+
+
     public boolean isGenresWindowOpen(){
         genresModalWindow.should(Condition.appear);
         if (genresModalWindow.isDisplayed() == false)
@@ -61,8 +65,15 @@ public class RecentUpdatesPage  {
 
     public void assertRecentUpdatesPageIsOpen(){
         profileDropDown.should(Condition.appear);
-        Assert.assertEquals(title(),"\n" +
-                "Recent Updates\n" +
-                " | Goodreads");
+        Assert.assertEquals(title().trim(),"Recent Updates | Goodreads");
+    }
+
+    public SearchResultPage searchBookByQuery(String query){
+        searchField.should(Condition.appear);
+        searchField.setValue(query);
+        searchField.pressEnter();
+        return new SearchResultPage ();
+
+
     }
 }
