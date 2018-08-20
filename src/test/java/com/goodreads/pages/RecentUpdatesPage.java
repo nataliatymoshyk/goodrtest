@@ -3,8 +3,10 @@ package com.goodreads.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.WebDriver;
+import org.junit.Assert;
 import org.openqa.selenium.support.FindBy;
+
+import static com.codeborne.selenide.Selenide.title;
 
 /**
  * Created by natalia on 8/18/18.
@@ -55,5 +57,12 @@ public class RecentUpdatesPage  {
         return new SignOutPage();
 
 
+    }
+
+    public void assertRecentUpdatesPageIsOpen(){
+        profileDropDown.should(Condition.appear);
+        Assert.assertEquals(title(),"\n" +
+                "Recent Updates\n" +
+                " | Goodreads");
     }
 }

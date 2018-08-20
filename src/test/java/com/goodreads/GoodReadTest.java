@@ -42,8 +42,12 @@ public class GoodReadTest extends BaseTest{
 
 
    }
-
+  @Test
    public void loginWithValidCredentials(){
+       homePage.enterSignInEmail(basicUserName);
+       homePage.enterSignInPassword(basicPassword);
+       RecentUpdatesPage page = homePage.clickSignInButton(new RecentUpdatesPage().page());
+       page.assertRecentUpdatesPageIsOpen();
 
    }
 
