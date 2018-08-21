@@ -16,22 +16,23 @@ import java.util.Random;
 /**
  * Created by natalia on 8/18/18.
  */
-public class BaseTest  {
+public class BaseTest {
 
     @BeforeClass
-    public static void init(){
-        Configuration.baseUrl= "https://www.goodreads.com/";
+    public static void init() {
+        Configuration.baseUrl = "https://www.goodreads.com/";
         Configuration.timeout = 4000;
         Configuration.browser = WebDriverFactory.class.getName();
 
     }
 
-    public String generateAlias(){ return RandomStringUtils.randomAlphabetic(6);
-        }
+    public String generateAlias() {
+        return RandomStringUtils.randomAlphabetic(6);
+    }
 
 
     @After
-    public void finish(){
+    public void finish() {
         Selenide.close();
     }
 

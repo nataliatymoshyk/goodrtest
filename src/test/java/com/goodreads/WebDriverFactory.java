@@ -12,8 +12,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  */
 public class WebDriverFactory implements WebDriverProvider {
 
-    public WebDriver createDriver(DesiredCapabilities desiredCapabilities){
-
+    public WebDriver createDriver(DesiredCapabilities desiredCapabilities) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("window-size=1280,720");
         return new ChromeDriver(options);

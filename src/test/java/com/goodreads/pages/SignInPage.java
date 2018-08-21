@@ -13,13 +13,18 @@ import org.openqa.selenium.support.FindBy;
 
 public class SignInPage {
 
-    public static SignInPage open(){return Selenide.open("https://www.goodreads.com/user/sign_in", SignInPage.class);}
-    public static SignInPage page() {return  Selenide.page(SignInPage.class);}
+    public static SignInPage open() {
+        return Selenide.open("https://www.goodreads.com/user/sign_in", SignInPage.class);
+    }
+
+    public static SignInPage page() {
+        return Selenide.page(SignInPage.class);
+    }
 
     @FindBy(id = "user_email")
     private SelenideElement emailAddressField;
 
-    @FindBy(id ="user_password")
+    @FindBy(id = "user_password")
     private SelenideElement passwordField;
 
     @FindBy(xpath = "//input[@type='sumbit' and @value='Sign in']")
@@ -28,10 +33,10 @@ public class SignInPage {
     @FindBy(xpath = "//p[@class='flash error']")
     private SelenideElement errorLabel;
 
-    public void assertWrongCredentialsMessageShown(){
+    public void assertWrongCredentialsMessageShown() {
         errorLabel.should(Condition.appear);
-        Assert.assertEquals(errorLabel.isDisplayed(),true);
-        Assert.assertEquals(errorLabel.text(),"Sorry, we didn’t recognize that email/password combination. Please try again.");
+        Assert.assertEquals(errorLabel.isDisplayed(), true);
+        Assert.assertEquals(errorLabel.text(), "Sorry, we didn’t recognize that email/password combination. Please try again.");
         System.out.println("The error message about incorrect credentials are shown");
     }
 }

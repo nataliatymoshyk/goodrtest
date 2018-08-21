@@ -11,10 +11,15 @@ import static com.codeborne.selenide.Selenide.title;
 /**
  * Created by natalia on 8/18/18.
  */
-public class RecentUpdatesPage  {
+public class RecentUpdatesPage {
 
-    public static RecentUpdatesPage open(){return Selenide.open("https://www.goodreads.com/", RecentUpdatesPage.class);}
-    public static RecentUpdatesPage page() {return Selenide.page(RecentUpdatesPage.class);}
+    public static RecentUpdatesPage open() {
+        return Selenide.open("https://www.goodreads.com/", RecentUpdatesPage.class);
+    }
+
+    public static RecentUpdatesPage page() {
+        return Selenide.page(RecentUpdatesPage.class);
+    }
 
     @FindBy(xpath = "//div[@class = 'modal__content']")
     private SelenideElement genresModalWindow;
@@ -32,18 +37,17 @@ public class RecentUpdatesPage  {
     private SelenideElement searchField;
 
 
-    public boolean isGenresWindowOpen(){
+    public boolean isGenresWindowOpen() {
         genresModalWindow.should(Condition.appear);
-        if (genresModalWindow.isDisplayed() == false)
-        {
+        if (genresModalWindow.isDisplayed() == false) {
             return false;
         }
         return true;
 
     }
 
-    public void closeGenresWindow(){
-        if(isGenresWindowOpen()){
+    public void closeGenresWindow() {
+        if (isGenresWindowOpen()) {
             closeGenresWindow.should(Condition.appear);
             closeGenresWindow.click();
             System.out.println("Genres selection modal window closed");
@@ -52,27 +56,27 @@ public class RecentUpdatesPage  {
 
     }
 
-    public SignOutPage signOut(){
+    public SignOutPage signOut() {
         profileDropDown.should(Condition.appear);
         profileDropDown.click();
         signOutProfileMenuItem.should(Condition.appear);
         signOutProfileMenuItem.click();
         System.out.println("Sign out button was clicked");
-        return new SignOutPage();
+        return SignOutPage.page();
 
 
     }
 
-    public void assertRecentUpdatesPageIsOpen(){
+    public void assertRecentUpdatesPageIsOpen() {
         profileDropDown.should(Condition.appear);
-        Assert.assertEquals(title().trim(),"Recent Updates | Goodreads");
+        Assert.assertEquals(title().trim(), "Recent Updates | Goodreads");
     }
 
-    public SearchResultPage searchBookByQuery(String query){
+    public SearchResultPage searchBookByQuery(String query) {
         searchField.should(Condition.appear);
         searchField.setValue(query);
         searchField.pressEnter();
-        return new SearchResultPage ();
+        return SearchResultPage.page();
 
 
     }

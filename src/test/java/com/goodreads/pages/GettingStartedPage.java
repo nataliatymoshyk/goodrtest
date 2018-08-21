@@ -12,16 +12,21 @@ import org.openqa.selenium.support.FindBy;
  */
 public class GettingStartedPage {
 
-    public static GettingStartedPage open() {return Selenide.open("https://www.goodreads.com/", GettingStartedPage.class);}
-    public static GettingStartedPage page() {return Selenide.page( GettingStartedPage.class);}
+    public static GettingStartedPage open() {
+        return Selenide.open("https://www.goodreads.com/", GettingStartedPage.class);
+    }
+
+    public static GettingStartedPage page() {
+        return Selenide.page(GettingStartedPage.class);
+    }
 
     @FindBy(id = "logo")
     private SelenideElement logo;
 
-    public RecentUpdatesPage clickLogo(){
+    public RecentUpdatesPage clickLogo() {
         logo.should(Condition.appear);
         logo.click();
         System.out.println("Logo clicked to back to main page");
-        return new RecentUpdatesPage();
+        return RecentUpdatesPage.page();
     }
 }

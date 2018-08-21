@@ -14,8 +14,13 @@ import static com.codeborne.selenide.Configuration.browser;
  */
 public class ReviewPopupPage {
 
-    public static ReviewPopupPage page() {return Selenide.page(ReviewPopupPage.class);}
-    public static ReviewPopupPage open() {return Selenide.open("/",ReviewPopupPage.class);}
+    public static ReviewPopupPage page() {
+        return Selenide.page(ReviewPopupPage.class);
+    }
+
+    public static ReviewPopupPage open() {
+        return Selenide.open("/", ReviewPopupPage.class);
+    }
 
 
     @FindBy(id = "box")
@@ -46,41 +51,43 @@ public class ReviewPopupPage {
     private SelenideElement saveReviewButton;
 
 
-    public void enterReview(String review){
+    public void enterReview(String review) {
         this.reviewPopupWindow.should(Condition.appear);
         reviewTextField.should(Condition.appear);
         reviewTextField.setValue(review);
         System.out.println("The review was entered into Review field");
     }
 
-    public void setOneStarMark(){
+    public void setOneStarMark() {
         oneStarButton.should(Condition.appear);
         oneStarButton.click();
         System.out.println("One star was clicked as rating");
     }
 
-    public void setTwoStarMark(){
+    public void setTwoStarMark() {
         twoStarsButton.should(Condition.appear);
         twoStarsButton.click();
         System.out.println("Two stars were clicked as rating");
     }
 
-    public void setThreeStarMark(){
+    public void setThreeStarMark() {
         threeStarsButton.should(Condition.appear);
         threeStarsButton.click();
         System.out.println("Three stars were clicked as rating");
     }
 
-    public void setFinishReadingDate(String year, String month, String day){
-    finishedDayDropdown.should(Condition.appear);
-    finishedYearDropdown.selectOption(year);
-    finishedMonthDropdown.selectOption(month);
-    finishedDayDropdown.selectOption(day);
-    System.out.println("Finish reading date was set up");
+    public void setFinishReadingDate(String year, String month, String day) {
+        finishedDayDropdown.should(Condition.appear);
+        finishedYearDropdown.selectOption(year);
+        finishedMonthDropdown.selectOption(month);
+        finishedDayDropdown.selectOption(day);
+        System.out.println("Finish reading date was set up");
     }
-    public void clickSaveReviewButton(){
+
+    public void clickSaveReviewButton() {
         saveReviewButton.should(Condition.appear);
         saveReviewButton.click();
+        System.out.println("Review was saved");
 
     }
 
