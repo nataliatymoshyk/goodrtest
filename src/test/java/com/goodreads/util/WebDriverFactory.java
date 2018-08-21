@@ -1,4 +1,4 @@
-package com.goodreads;
+package com.goodreads.util;
 
 import com.codeborne.selenide.WebDriverProvider;
 import org.openqa.selenium.WebDriver;

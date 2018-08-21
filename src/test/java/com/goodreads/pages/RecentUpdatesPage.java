@@ -36,6 +36,9 @@ public class RecentUpdatesPage {
     @FindBy(xpath = "//input[@class='searchBox__input searchBox__input--navbar']")
     private SelenideElement searchField;
 
+    @FindBy(xpath = "//li[@class='siteHeader__topLevelItem']/a[text()='My Books']")
+    private SelenideElement myBooksHeaderLink;
+
 
     public boolean isGenresWindowOpen() {
         genresModalWindow.should(Condition.appear);
@@ -78,6 +81,12 @@ public class RecentUpdatesPage {
         searchField.pressEnter();
         return SearchResultPage.page();
 
+    }
+
+    public MyBooksPage clickMyBooksHeader(){
+        myBooksHeaderLink.should(Condition.appear);
+        myBooksHeaderLink.click();
+        return MyBooksPage.page();
 
     }
 }

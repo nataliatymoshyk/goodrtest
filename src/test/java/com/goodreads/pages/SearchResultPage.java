@@ -24,7 +24,7 @@ public class SearchResultPage {
 
     public SelenideElement buildWantToReadButtonPath(String bookId) {
         String path = String.format("//div[contains(@id,'%s_book')]", bookId);
-        SelenideElement wantToReadButton = $(By.xpath(path));
+        SelenideElement wantToReadButton = $(By.xpath(path+"/div/form/button"));
         return wantToReadButton;
     }
 
@@ -32,7 +32,7 @@ public class SearchResultPage {
     public void clickWantToReadButtonForBook(String bookId) {
         SelenideElement wantToReadButton = buildWantToReadButtonPath(bookId);
         wantToReadButton.should(Condition.appear);
-        wantToReadButton.click();//activate div
+       // wantToReadButton.click();//activate div
         wantToReadButton.click();//click the button
         System.out.println("Book number # %s was marked as want to read");
 

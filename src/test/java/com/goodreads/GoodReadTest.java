@@ -1,5 +1,6 @@
 package com.goodreads;
 
+import com.codeborne.selenide.WebDriverRunner;
 import com.goodreads.pages.*;
 import org.junit.After;
 import org.junit.Before;
@@ -13,34 +14,13 @@ public class GoodReadTest extends BaseTest {
 
     String basicUserName = "azolka+test@gmail.com";
     String basicPassword = "test1234";
-    GettingStartedPage gettingStartedPage;
     HomePage homePage;
-    // String alias;
+
 
     @Before
-    public void registerNewUser() {
-        homePage = HomePage.open(); //open the site
+    public void openSite() {
+        homePage = HomePage.open();
     }
-
-    @Test
-    public void loginWithInvalidCredentials() {
-        homePage.enterSignInEmail(basicUserName);
-        homePage.enterSignInPassword("wrongPass");
-        SignInPage page = homePage.clickSignInButton(new SignInPage().page());
-        page.assertWrongCredentialsMessageShown();
-
-
-    }
-
-    @Test
-    public void loginWithValidCredentials() {
-        homePage.enterSignInEmail(basicUserName);
-        homePage.enterSignInPassword(basicPassword);
-        RecentUpdatesPage page = homePage.clickSignInButton(new RecentUpdatesPage().page());
-        page.assertRecentUpdatesPageIsOpen();
-
-    }
-
 
     @Test
     public void searchForThreeBestCrimeBooks() {
@@ -75,17 +55,14 @@ public class GoodReadTest extends BaseTest {
         review3.enterReview("It was nice");
         review3.setFinishReadingDate("2016", "June", "10");
         review3.clickSaveReviewButton();
-
     }
 
-    @Test
-    public void signOut() {
-        homePage.enterSignInEmail(basicUserName);
-        homePage.enterSignInPassword(basicPassword);
-        RecentUpdatesPage page = homePage.clickSignInButton(new RecentUpdatesPage().page());
-        SignOutPage signOutPage = page.signOut();
-        signOutPage.assertSignOutPageIsOpen();
+    @After
+    public void clearAllShelves() {
+        RecentUpdatesPage page = RecentUpdatesPage.open();
+        MyBooksPage myBooksPage =  page.clickMyBooksHeader();
+        myBooksPage.clickAllBooksSlelf();
+        myBooksPage.deleteAllBooks();
     }
-
 
 }
