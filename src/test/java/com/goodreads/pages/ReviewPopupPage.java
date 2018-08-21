@@ -1,33 +1,53 @@
 package com.goodreads.pages;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
+import com.goodreads.BaseTest;
+import org.jsoup.Connection;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+
+import static com.codeborne.selenide.Configuration.browser;
 
 /**
  * Created by natalia on 8/20/18.
  */
 public class ReviewPopupPage {
-    public static RecentUpdatesPage page() {return Selenide.page(RecentUpdatesPage.class);}
+
+    public static ReviewPopupPage page() {return Selenide.page(ReviewPopupPage.class);}
+    public static ReviewPopupPage open() {return Selenide.open("/",ReviewPopupPage.class);}
+
 
     @FindBy(id = "box")
     private SelenideElement reviewPopupWindow;
 
-    @FindBy(xpath = "//a[@title = 'did not like it']")
+    @FindBy(xpath = "//div[@class = 'formItem']/div[@class='stars']/a[@title='did not like it']")
     private SelenideElement oneStarButton;
 
-    @FindBy(xpath = "//a[@title = 'it was ok']")
+    @FindBy(xpath = "//div[@class = 'formItem']/div[@class='stars']/a[@title = 'it was ok']")
     private SelenideElement twoStarsButton;
 
-    @FindBy(xpath = "//a[@title = 'liked it']")
+    @FindBy(xpath = "//div[@class = 'formItem']/div[@class='stars']/a[@title = 'liked it']")
     private SelenideElement threeStarsButton;
 
     @FindBy(id = "review_review_usertext")
     private SelenideElement reviewTextField;
 
+    @FindBy(xpath = "//select[@class='rereadDatePicker smallPicker endYear']")
+    private SelenideElement finishedYearDropdown;
+
+    @FindBy(xpath = "//select[@class='rereadDatePicker largePicker endMonth']")
+    private SelenideElement finishedMonthDropdown;
+
+    @FindBy(xpath = "//select[@class='rereadDatePicker smallPicker endDay']")
+    private SelenideElement finishedDayDropdown;
+
+    @FindBy(xpath = "//input[@class = 'gr-button' and @value ='Save']")
+    private SelenideElement saveReviewButton;
+
+
     public void enterReview(String review){
-        reviewPopupWindow.should(Condition.appear);
+        this.reviewPopupWindow.should(Condition.appear);
         reviewTextField.should(Condition.appear);
         reviewTextField.setValue(review);
         System.out.println("The review was entered into Review field");
@@ -40,15 +60,28 @@ public class ReviewPopupPage {
     }
 
     public void setTwoStarMark(){
-        oneStarButton.should(Condition.appear);
-        oneStarButton.click();
+        twoStarsButton.should(Condition.appear);
+        twoStarsButton.click();
         System.out.println("Two stars were clicked as rating");
     }
 
     public void setThreeStarMark(){
-        oneStarButton.should(Condition.appear);
-        oneStarButton.click();
+        threeStarsButton.should(Condition.appear);
+        threeStarsButton.click();
         System.out.println("Three stars were clicked as rating");
+    }
+
+    public void setFinishReadingDate(String year, String month, String day){
+    finishedDayDropdown.should(Condition.appear);
+    finishedYearDropdown.selectOption(year);
+    finishedMonthDropdown.selectOption(month);
+    finishedDayDropdown.selectOption(day);
+    System.out.println("Finish reading date was set up");
+    }
+    public void clickSaveReviewButton(){
+        saveReviewButton.should(Condition.appear);
+        saveReviewButton.click();
+
     }
 
 }

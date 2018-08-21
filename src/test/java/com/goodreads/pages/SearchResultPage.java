@@ -13,9 +13,8 @@ import static com.codeborne.selenide.Selenide.$;
  */
 public class SearchResultPage {
 
-    public SearchResultPage open(){return Selenide.open("https://www.goodreads.com/search?q=",SearchResultPage.class);}
-    public SearchResultPage page(){return  Selenide.page(SearchResultPage.class);}
-
+    public static SearchResultPage open(){return Selenide.open("https://www.goodreads.com/search?q=",SearchResultPage.class);}
+    public  static SearchResultPage page(){return  Selenide.page(SearchResultPage.class);}
 
 
     public SelenideElement buildWantToReadButtonPath(String bookId){
@@ -24,10 +23,7 @@ public class SearchResultPage {
         return wantToReadButton;
     }
 
-    public void buildMarkAsReadButtonPath(String bookId){
 
-
-    }
     public void clickWantToReadButtonForBook(String bookId){
        SelenideElement wantToReadButton = buildWantToReadButtonPath(bookId);
         wantToReadButton.should(Condition.appear);
@@ -38,12 +34,14 @@ public class SearchResultPage {
     }
 
     public ReviewPopupPage clickMarkBookAsReadButtonForBook(String bookId){
-        String menuString = String.format("//div[contains(@id,'%s_book')]/div[@class = 'wtrDown wtrRight']",bookId);
+        String menuString = String.format("//div[contains(@id,'%s_book')]/div[contains(@class,'wtrRight')]",bookId);
         SelenideElement menuPath = $(By.xpath(menuString));
-        menuPath.click();
         SelenideElement readButtonPath = menuPath.find(By.xpath("//div[@class='wtrShelfMenu']/div/ul/li[@data-shelf-name='read']"));
+        menuPath.should(Condition.appear);
+        menuPath.click();
+        readButtonPath.should(Condition.appear);
         readButtonPath.click();
-        return new  ReviewPopupPage();
+        return ReviewPopupPage.page();
 
     }
 

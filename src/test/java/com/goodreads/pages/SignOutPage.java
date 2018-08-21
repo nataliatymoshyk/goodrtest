@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class SignOutPage {
 
-public  static SignOutPage open(){return Selenide.open("https://www.goodreads.com/user/sign_out", SignOutPage.class);}
+public static SignOutPage open(){return Selenide.open("https://www.goodreads.com/user/sign_out", SignOutPage.class);}
 public static SignOutPage page() {return Selenide.page(SignOutPage.class);}
 
     @FindBy(xpath = "//a[text() ='Goodreads Home']")

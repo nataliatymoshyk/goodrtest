@@ -23,11 +23,12 @@ public class BaseTest  {
         Configuration.baseUrl= "https://www.goodreads.com/";
         Configuration.timeout = 4000;
         Configuration.browser = WebDriverFactory.class.getName();
-    }
 
+    }
 
     public String generateAlias(){ return RandomStringUtils.randomAlphabetic(6);
         }
+
 
     @After
     public void finish(){

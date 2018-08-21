@@ -22,6 +22,6 @@ public class GettingStartedPage {
         logo.should(Condition.appear);
         logo.click();
         System.out.println("Logo clicked to back to main page");
-        return new  RecentUpdatesPage();
+        return new RecentUpdatesPage();
     }
 }

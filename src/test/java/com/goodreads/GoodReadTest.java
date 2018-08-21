@@ -1,6 +1,7 @@
 package com.goodreads;
 
 import com.goodreads.pages.*;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,19 +19,7 @@ public class GoodReadTest extends BaseTest{
 
     @Before
     public void registerNewUser(){
-       // alias = generateAlias();//generate random numbers to make names unique
         homePage = HomePage.open(); //open the site
-      /*  homePage.enterSignUpName(basicUserName+alias);
-        homePage.enterSignUpEmail(basicUserName+"@gmail.com");
-        homePage.enterSignUpPassword(basicPassword);
-        gettingStartedPage = homePage.clickSignUpButton(); //sign up using unique credentilas.
-        System.out.println("User was signed up");
-
-        RecentUpdatesPage recentUpdatesPage = gettingStartedPage.clickLogo(); //back to home page
-        recentUpdatesPage.closeGenresWindow(); //close genres selection pop up window
-        SignOutPage signOutPage = recentUpdatesPage.signOut(); //sign out and back to home screen
-        homePage =  signOutPage.clickHomeLink();*/
-
     }
 
    @Test
@@ -69,7 +58,25 @@ public class GoodReadTest extends BaseTest{
        homePage.enterSignInPassword(basicPassword);
        RecentUpdatesPage page = homePage.clickSignInButton(new RecentUpdatesPage().page());
        SearchResultPage search = page.searchBookByQuery("Best crime and mystery books");
-       search.clickMarkBookAsReadButtonForBook("1");
+       ReviewPopupPage review = search.clickMarkBookAsReadButtonForBook("1");
+
+       review.setOneStarMark();
+       review.enterReview("I didn't like");
+       review.setFinishReadingDate("2018", "January", "1");
+       review.clickSaveReviewButton();
+       ReviewPopupPage review2 = search.clickMarkBookAsReadButtonForBook("2");
+       review2.setTwoStarMark();
+       review2.enterReview("It was ok");
+       review2.setFinishReadingDate("2017", "May", "8");
+       review2.clickSaveReviewButton();
+       ReviewPopupPage review3 = search.clickMarkBookAsReadButtonForBook("3");
+       review3.setThreeStarMark();
+       review3.enterReview("It was nice");
+       review3.setFinishReadingDate("2016", "June", "10");
+       review3.clickSaveReviewButton();
 
    }
+
+
+
 }
